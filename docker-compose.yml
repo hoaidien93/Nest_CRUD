@@ -9,4 +9,13 @@ services:
             - "3306:3306"
         volumes: 
             - ../mysql:/var/lib/mysql
+    backend:
+        image: nest-js
+        ports: 
+          - '8003:3000'
+        depends_on:
+          - db
+        links:
+          - db
+        restart: always
 

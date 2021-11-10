@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Constants } from 'src/utils/constants';
+import { Constants } from '../../utils/constants';
 import { Repository } from 'typeorm';
 import { FindUserDTO } from './dto/find.dto';
 import { RegisterDTO } from './dto/register.dto';
-import { UpdateDTO } from './dto/update.dto';
 import { ProvinceEntity } from './entites/province.entity';
 import { UserEntity } from './entites/user.entity';
 import { ListUser } from './interfaces/listUser.interface';
@@ -15,6 +14,8 @@ export class UserRepository {
     constructor(
         @InjectRepository(UserEntity)
         private readonly userRepository: Repository<UserEntity>,
+        @InjectRepository(ProvinceEntity)
+        private readonly provinceRepository: Repository<ProvinceEntity>,
     ) { }
 
     async register(data: RegisterDTO, isAdmin: boolean): Promise<UserEntity> {
@@ -93,5 +94,9 @@ export class UserRepository {
             pageIndex: query.pageIndex,
             totalPage: Math.ceil(total / query.perPage)
         }
+    }
+
+    async getListProvinces(): Promise<ProvinceEntity[]>{
+        return await this.provinceRepository.find({});
     }
 }

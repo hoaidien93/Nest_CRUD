@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { UserEntity } from './entites/user.entity';
 import * as bcrypt from 'bcrypt';
-import { Constants } from 'src/utils/constants';
+import { Constants } from '../../utils/constants';
 
 @EventSubscriber()
 export class UserSubscribe implements EntitySubscriberInterface<UserEntity> {

@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, ParseArrayPipe, Post, Put, Query, Req } 
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { Request } from 'express';
 import { JSONResponse } from 'src/interfaces/response.interface';
-import { Constants } from 'src/utils/constants';
-import { handleChecker } from 'src/utils/helpers';
+import { Constants } from '../../utils/constants';
+import { handleChecker } from '../../utils/helpers';
 import { FindUserDTO } from './dto/find.dto';
 import { LoginDTO } from './dto/login.dto';
 import { RegisterDTO } from './dto/register.dto';
@@ -54,6 +54,12 @@ export class UserController {
     @Roles(Constants.ADMIN_ROLE)
     async postRegisterAdmin(@Body() data: RegisterDTO): Promise<JSONResponse>{
         const result = await this.userService.register(data, true);
+        return handleChecker(result);
+    }
+
+    @Get("list-provinces")
+    async getListProvinces(): Promise<JSONResponse>{
+        const result = await this.userService.getListProvinces();
         return handleChecker(result);
     }
 }

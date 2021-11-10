@@ -1,4 +1,4 @@
-import { Constants } from 'src/utils/constants';
+import { Constants } from '../../../utils/constants';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { ProvinceEntity } from './province.entity';
 

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
 import { Checker } from 'src/interfaces/checker.interface';
-import { Constants } from 'src/utils/constants';
+import { Constants } from '../../utils/constants';
 import { LoginDTO } from './dto/login.dto';
 import { RegisterDTO } from './dto/register.dto';
 import { UpdateDTO } from './dto/update.dto';
@@ -130,5 +130,13 @@ export class UserService {
             };
         }
         return Constants.FAIL_CHECK
+    }
+
+    async getListProvinces(): Promise<Checker>{
+        const listProvinces = await this.userRepository.getListProvinces();
+        return {
+            isSuccess: true,
+            data: listProvinces
+        }
     }
 }

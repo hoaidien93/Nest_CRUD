@@ -45,6 +45,7 @@ export class AppModule implements NestModule {
     consume.apply(AuthMiddleware).exclude(
       "user/login",
       "user/register",
+      "user/list-provinces"
     ).forRoutes("*")
   }
 }
